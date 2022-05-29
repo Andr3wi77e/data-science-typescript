@@ -1,1 +1,1 @@
-# neural-net-typescript
+# data-science-typescript
