@@ -53,6 +53,13 @@ module.exports = {
       },
       files: ['webpack.config.js'],
     },
+    {
+      files: ['*.ts'],
+      rules: {
+        'no-unused-vars': 0,
+        '@typescript-eslint/no-unused-vars': ['error'],
+      },
+    },
   ],
   settings: {
     'import/parsers': {
