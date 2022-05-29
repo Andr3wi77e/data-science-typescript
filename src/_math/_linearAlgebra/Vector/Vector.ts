@@ -17,7 +17,7 @@ class Vector implements VectorClass {
     return this.vector;
   }
 
-  private math(type: MathVectorType, vectors: Vector[]): Vector {
+  math(type: MathVectorType, vectors: Vector[]): Vector {
     if (vectors.length < 1) {
       return this;
     }
@@ -54,6 +54,8 @@ class Vector implements VectorClass {
         newVector = multiplicationScalar(vector, newVector);
       }
     });
+
+    this.vector = newVector;
 
     return new Vector(newVector);
   }
