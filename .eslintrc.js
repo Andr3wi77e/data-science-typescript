@@ -45,6 +45,12 @@ module.exports = {
         'react/jsx-props-no-spreading': 0,
         'no-unused-vars': 'warn',
         'import/no-unresolved': 'error',
+        'no-console': [
+          'error',
+          {
+            allow: ['warn', 'error', 'info'],
+          },
+        ],
       },
     },
     {
