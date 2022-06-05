@@ -1,9 +1,14 @@
 import Matrix from './Matrix';
 import { MatrixType, MakeMatrixFnType } from './types';
-import Vector from '@math/_linearAlgebra/Vector';
 
-const rightMatrix: MatrixType = [new Vector([1, 1]), new Vector([1, 1])];
-const wrongMatrix: MatrixType = [new Vector([1, 1]), new Vector([1, 1, 1])];
+const rightMatrix: MatrixType = [
+  [1, 1],
+  [1, 1],
+];
+const wrongMatrix: MatrixType = [
+  [1, 1],
+  [1, 1, 1],
+];
 
 const addMakeMatrixFn =
   (expect: number): MakeMatrixFnType =>
@@ -23,13 +28,19 @@ describe('тестирование Matrix', () => {
 
     test('создание матрицы 2 на 3', () => {
       expect(Matrix.makeMatrix(2, 3, (i, j) => i + j).matrix).toEqual(
-        new Matrix([new Vector([0, 1, 2]), new Vector([1, 2, 3])]).matrix
+        new Matrix([
+          [0, 1, 2],
+          [1, 2, 3],
+        ]).matrix
       );
     });
 
     test('создание единичной матрицы 2 на 2', () => {
       expect(Matrix.identityMatrix(2, 2).matrix).toEqual(
-        new Matrix([new Vector([1, 0]), new Vector([0, 1])]).matrix
+        new Matrix([
+          [1, 0],
+          [0, 1],
+        ]).matrix
       );
     });
   });

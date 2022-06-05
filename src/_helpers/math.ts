@@ -1,3 +1,2 @@
-export const add = () => {
-  console.log('add 2 ');
-};
+export const sum = (arr: number[]) =>
+  arr.reduce((partialSum, a) => partialSum + a, 0);

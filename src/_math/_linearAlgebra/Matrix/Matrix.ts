@@ -1,36 +1,46 @@
-import type { VectorType } from '@math/_linearAlgebra/Vector';
-import { MatrixType, MakeMatrixFnType, MathMatrixType } from './types';
 import {
+  MakeMatrixFnType,
+  MathMatrixType,
+  MatrixType,
+  MatrixValueType,
+  MatrixInputType,
+} from './types';
+import {
+  checkIsSameDimensions,
   checkMatrix,
+  convertArgs,
   identityMatrixFn,
   makeMatrix,
-  checkIsSameDimensions,
+  convertInputArgs,
 } from './utils';
+import { VectorType } from '@math/_linearAlgebra/Vector';
 
 class Matrix {
-  private _matrix: MatrixType;
+  private _matrix: MatrixValueType;
 
   constructor(matrix: MatrixType) {
     checkMatrix(matrix);
-    this._matrix = matrix;
+    this._matrix = convertArgs([matrix])[0];
   }
 
-  get matrix() {
+  get matrix(): MatrixValueType {
     return this._matrix;
   }
 
   private set matrix(_m: MatrixType) {
-    this._matrix = _m;
+    this._matrix = convertArgs([_m])[0];
   }
 
-  math(type: MathMatrixType, matrices: Matrix[]): Matrix {
+  math(type: MathMatrixType, matrices: MatrixInputType[]): Matrix {
     if (matrices.length === 0) {
       return this;
     }
 
+    const _matrices = convertInputArgs(matrices);
+
     const newMatrix: MatrixType = this.matrix;
 
-    matrices.forEach(matrix => {
+    _matrices.forEach(matrix => {
       checkIsSameDimensions(matrix.matrix, newMatrix);
 
       for (let i = 0; i < newMatrix.length; i++) {
@@ -43,10 +53,10 @@ class Matrix {
     return new Matrix(newMatrix);
   }
 
-  add(...matrices: Matrix[]): Matrix {
+  add(...matrices: MatrixInputType[]): Matrix {
     return this.math('add', matrices);
   }
-  subtract(...matrices: Matrix[]): Matrix {
+  subtract(...matrices: MatrixInputType[]): Matrix {
     return this.math('subtract', matrices);
   }
 

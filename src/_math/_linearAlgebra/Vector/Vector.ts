@@ -7,14 +7,18 @@ import {
 } from './utils';
 
 class Vector implements VectorClass {
-  private vector: VectorsType;
+  private _vector: VectorsType;
 
   constructor(vector: VectorsType) {
-    this.vector = vector;
+    this._vector = vector;
   }
 
-  getVector() {
-    return this.vector;
+  get vector() {
+    return this._vector;
+  }
+
+  private set vector(_v: VectorsType) {
+    this._vector = _v;
   }
 
   math(type: MathVectorType, vectors: Vector[]): Vector {
