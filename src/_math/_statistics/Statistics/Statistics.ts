@@ -2,7 +2,19 @@ import {
   StatisticsDatasetConstructorType,
   StatisticsDatasetType,
 } from './types';
-import { init, max, mean, min, median, quantile, mode } from './utils';
+import {
+  init,
+  max,
+  mean,
+  min,
+  median,
+  quantile,
+  mode,
+  range,
+  variance,
+  standardDeviation,
+  interquartileRange,
+} from './utils';
 
 export default class Statistics {
   private readonly _dataset: StatisticsDatasetType;
@@ -37,5 +49,20 @@ export default class Statistics {
 
   get mode() {
     return mode(this.dataset);
+  }
+  get range() {
+    return range(this.dataset);
+  }
+
+  get variance() {
+    return variance(this.dataset);
+  }
+
+  get standardDeviation() {
+    return standardDeviation(this.dataset);
+  }
+
+  get interquartileRange() {
+    return interquartileRange(this.dataset);
   }
 }

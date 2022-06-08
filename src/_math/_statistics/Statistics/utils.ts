@@ -44,7 +44,7 @@ export const median = (dataset: StatisticsDatasetType) => {
 };
 
 export const quantile = (dataset: StatisticsDatasetType, percent: number) => {
-  const index = Math.trunc(Math.min(percent, 1) * dataset.vector.length);
+  const index = Math.ceil(Math.min(percent, 1) * dataset.vector.length);
 
   return sort(dataset)[index];
 };
@@ -69,4 +69,26 @@ export const mode = (dataset: StatisticsDatasetType) => {
   });
 
   return maxValues;
+};
+
+export const range = (dataset: StatisticsDatasetType) => {
+  return max(dataset) - min(dataset);
+};
+
+const deMean = (dataset: StatisticsDatasetType) => {
+  const _mean = mean(dataset);
+  return dataset.vector.map(value => (value - _mean) ** 2);
+};
+
+export const variance = (dataset: StatisticsDatasetType) => {
+  const deMeanSet = deMean(dataset);
+  return sum(deMeanSet) / (dataset.vector.length - 1);
+};
+
+export const standardDeviation = (dataset: StatisticsDatasetType) => {
+  return Math.sqrt(variance(dataset));
+};
+
+export const interquartileRange = (dataset: StatisticsDatasetType) => {
+  return quantile(dataset, 0.75) - quantile(dataset, 0.25);
 };

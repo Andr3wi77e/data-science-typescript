@@ -37,11 +37,26 @@ describe('Тестирование Statistics', () => {
     });
     test('тестирование квантиля', () => {
       expect(new Statistics([1, 2, 3, 4, 5]).quantile(0.2)).toBe(2);
-      expect(new Statistics([1, 2, 3, 4, 5]).quantile(0.5)).toBe(3);
+      expect(new Statistics([1, 2, 3, 4, 5]).quantile(0.5)).toBe(4);
     });
     test('тестирование моды', () => {
       expect(new Statistics([1, 2, 3, 4, 5, 5]).mode).toEqual([5]);
       expect(new Statistics([1, 2, 2, 3, 4, 5, 5]).mode).toEqual([2, 5]);
+    });
+  });
+
+  describe('тестирование поквзателей вариации', () => {
+    test('тестирование размаха', () => {
+      expect(statistics.range).toBe(2);
+    });
+    test('тестирование дисперсии', () => {
+      expect(statistics.variance).toBe(1);
+    });
+    test('тестирование стандартного отклонения', () => {
+      expect(statistics.standardDeviation).toBe(1);
+    });
+    test('тестирование интерквартильного размаха', () => {
+      expect(new Statistics([1, 2, 3, 4, 5]).interquartileRange).toBe(2);
     });
   });
 });
